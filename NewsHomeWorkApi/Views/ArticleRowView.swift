@@ -16,30 +16,30 @@ struct ArticleRowView: View {
     
     var body: some View {
         VStack {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 AsyncImage(url: article.imageURL){
                     phase in switch phase {
                     case .empty: ProgressView()
                     case .success(let image): image
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
-                        
+                            .scaledToFill()
+                            .frame(minHeight:300, maxHeight: 400)
+                            .background(Color.white)
+                            .clipped()
                     case .failure: Image(systemName: "photo")
                         
                     @unknown default: fatalError()
                     }
-                } // получаем изображение
+                }// получаем изображение
                 
-                Spacer()
-                
-                VStack(alignment: .leading, spacing: 8, content: {
+                VStack(alignment: .leading, spacing: 5, content: {
                     Text(article.title)
                         .font(.headline)
-                        .lineLimit(3)
+                        .lineLimit(1)
                     
                     Text(article.descriptionText)
                         .font(.subheadline)
-                        .lineLimit(2)
+                        .lineLimit(3)
                     
                     HStack {
                         Text(article.captitionText)
@@ -48,7 +48,6 @@ struct ArticleRowView: View {
                             .font(.caption)
                         
                         Spacer()
-                        
                         
                         Button {
                             toggleBookmark(for: article)
@@ -65,16 +64,13 @@ struct ArticleRowView: View {
                         .buttonStyle(.bordered)
                     }//:Hstack
                 })//:Vstack
-                .frame(height: 150, alignment: .bottom)
+                .frame(width: UIScreen.screenWidth * 0.9, height: 120,  alignment: .bottom)
                 .padding([.horizontal, .bottom])
                 .background(Color.white.opacity(0.7))
                 .ignoresSafeArea()
                 .cornerRadius(20)
             }
         }
-        .frame(minHeight: 300, maxHeight: 400)
-        .background(Color.gray.opacity(0.3))
-        .clipped()
         .onTapGesture { selectedArticle = article }
         .sheet(item: $selectedArticle) {
             SafariView(url: $0.articleURL)
@@ -95,9 +91,12 @@ extension View {
     func presentShareSheet(url: URL) {
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
-
-    }
+    } //функция поделиться
 }
+
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+} //получаем размер экрана
 
 struct ArticleRowView_Previews: PreviewProvider {
     

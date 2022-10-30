@@ -23,7 +23,7 @@ struct NewsAPI {
     private func generateNewsURL(from category: Category) -> URL {
         var url = "https://newsapi.org/v2/top-headlines?"
         url += "apiKey=\(apiKey)"
-        url += "&language=ru"
+        url += "&language=en"
         url += "&category=\(category.rawValue)"
         return URL(string: url)!
     } // создаем URL для получения данных из API

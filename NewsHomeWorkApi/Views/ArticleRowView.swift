@@ -15,9 +15,8 @@ struct ArticleRowView: View {
     @State private var selectedArticle: Article?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16, content: {
-            HStack {
-                Spacer()
+        VStack {
+            ZStack {
                 AsyncImage(url: article.imageURL){
                     phase in switch phase {
                     case .empty: ProgressView()
@@ -28,64 +27,68 @@ struct ArticleRowView: View {
                     case .failure: Image(systemName: "photo")
                         
                     @unknown default: fatalError()
-                        
                     }
-                }
-                .frame(minHeight: 200, maxHeight: 300)
+                } // получаем изображение
+                
                 Spacer()
+                
+                VStack(alignment: .leading, spacing: 8, content: {
+                    Text(article.title)
+                        .font(.headline)
+                        .lineLimit(3)
+                    
+                    Text(article.descriptionText)
+                        .font(.subheadline)
+                        .lineLimit(2)
+                    
+                    HStack {
+                        Text(article.captitionText)
+                            .lineLimit(1)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                        
+                        Spacer()
+                        
+                        
+                        Button {
+                            toggleBookmark(for: article)
+                        } label: {
+                            Image(systemName: articleBookmarkViewModel.isBookmarked(for: article) ? "heart.circle.fill" : "heart.circle")
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Button {
+                            presentShareSheet(url: article.articleURL)
+                        } label: {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        .buttonStyle(.bordered)
+                    }//:Hstack
+                })//:Vstack
+                .frame(height: 150, alignment: .bottom)
+                .padding([.horizontal, .bottom])
+                .background(Color.white.opacity(0.7))
+                .ignoresSafeArea()
+                .cornerRadius(20)
             }
-        })
-
-        .frame(minHeight: 200, maxHeight: 300)
+        }
+        .frame(minHeight: 300, maxHeight: 400)
         .background(Color.gray.opacity(0.3))
         .clipped()
         .onTapGesture { selectedArticle = article }
         .sheet(item: $selectedArticle) {
             SafariView(url: $0.articleURL)
         }
-    
-        VStack(alignment: .leading, spacing: 8, content: {
-            Text(article.title)
-                .font(.headline)
-                .lineLimit(3)
-            
-            Text(article.descriptionText)
-                .font(.subheadline)
-                .lineLimit(2)
-            
-            HStack {
-                Text(article.captitionText)
-                    .lineLimit(1)
-                    .foregroundColor(.secondary)
-                    .font(.caption)
-                
-                Spacer()
-            
-                    
-                    Button {
-                        toggleBookmark(for: article)
-                    } label: {
-                        Image(systemName: articleBookmarkViewModel.isBookmarked(for: article) ? "heart.circle.fill" : "heart.circle")
-                    }
-                    .buttonStyle(.bordered)
-                    
-                    Button {
-                        presentShareSheet(url: article.articleURL)
-                    } label: {
-                        Image(systemName: "square.and.arrow.up")
-                    }
-                    .buttonStyle(.bordered)
-            }
-        })
-        .padding([.horizontal, .bottom])
     }
+    
+    
     private func toggleBookmark(for article: Article) {
         if articleBookmarkViewModel.isBookmarked(for: article) {
             articleBookmarkViewModel.removeBookmark(for: article)
         } else {
             articleBookmarkViewModel.addBookmark(for: article)
         }
-    }
+    }//функция которая проверяет нажата ли кнопка избранного или нет
 }
 
 extension View {

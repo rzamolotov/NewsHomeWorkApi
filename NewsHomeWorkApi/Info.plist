@@ -33,7 +33,12 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>
-	<dict/>
+	<dict>
+		<key>launchscreenicon</key>
+		<string></string>
+	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>l</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -41,7 +41,7 @@ struct NewsAPI {
        
         guard let response = response as? HTTPURLResponse else {
             throw generateError(description: "Ошибка ответа сервера")
-        }
+        } //если не получаем ответ при запросе получаем ошибку сервера
         
         switch response.statusCode {
         case (200...299), (400...499):
@@ -53,9 +53,7 @@ struct NewsAPI {
             }
         default:
             throw generateError(description: "Произошла ошибка сервера")
-        }
-        
-        
+        } //генерируем ошибки
     }
     
     func generateSearchURL(from query: String) -> URL {

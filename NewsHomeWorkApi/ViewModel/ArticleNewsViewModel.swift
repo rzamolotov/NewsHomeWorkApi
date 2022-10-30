@@ -11,12 +11,13 @@ enum DataFetchPhase<T> {
     case empty
     case success(T)
     case failure(Error)
-}
+} // перечисление типов получения данных
 
 struct FetchTaskToken: Equatable {
     var category: Category
     var token: Date
-}
+} //получение токена задачи
+
 @MainActor
 class ArticleNewsViewModel: ObservableObject {
     
@@ -34,8 +35,7 @@ class ArticleNewsViewModel: ObservableObject {
     }
     
     func loadArticles() async {
-//        phase = .success(Article.previewData)
-        if Task.isCancelled { return }
+        if Task.isCancelled { return } //если задача загрузки артиклуов отменена вызываем прерываем загрузку артикулов
         phase = .empty
         do  {
             let articles = try await newsAPI.fetch(from: fetchTaskToken.category)

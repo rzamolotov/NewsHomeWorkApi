@@ -42,7 +42,7 @@ struct SearchTabView: View {
             if !searchViewModel.searchQuery.isEmpty {
                 ProgressView()
             } else {
-                EmptyPlaseholderView(text: "Введите свой запрос для поиска новостей", image: Image(systemName: "magnifyinglass"))
+                EmptyPlaseholderView(text: "Введите свой запрос для поиска новостей только на английском языке", image: Image(systemName: "magnifyinglass"))
             }
             
         case .success(let articles) where articles.isEmpty:
@@ -55,10 +55,8 @@ struct SearchTabView: View {
         }
     }
     
-  
-    
     private func search() {
-        async {
+        Task {
             await searchViewModel.searchArticle()
         }
     }

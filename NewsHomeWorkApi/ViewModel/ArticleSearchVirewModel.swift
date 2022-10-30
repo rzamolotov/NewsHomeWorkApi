@@ -32,7 +32,5 @@ class ArticleSearchViewModel: ObservableObject {
             if Task.isCancelled { return }
             phase = .failure(error)
         }
-        
-    }
-    
+    } //поиск новостей
 }

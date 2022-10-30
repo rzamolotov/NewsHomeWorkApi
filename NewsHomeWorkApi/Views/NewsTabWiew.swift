@@ -10,7 +10,7 @@ import SwiftUI
 struct NewsTabWiew: View {
     
     @StateObject var articleNewsViewModel = ArticleNewsViewModel()
-   
+        
     var body: some View {
         NavigationView {
             ArticleListView(articles: articles)
@@ -45,7 +45,7 @@ struct NewsTabWiew: View {
         }
     }
     
-    private func loadTask() async {
+    @Sendable private func loadTask() async {
             await articleNewsViewModel.loadArticles()
     }
     

@@ -26,22 +26,21 @@ struct NewsAPI {
         url += "&language=ru"
         url += "&category=\(category.rawValue)"
         return URL(string: url)!
-    }
+    } // создаем URL для получения данных из API
     
     func fetch(from category: Category) async throws -> [Article] {
         try await fetchArticles(from: generateNewsURL(from: category))
-    }
+    } //функция получения новостей с API
     
     func search(for query: String) async throws -> [Article] {
         try await fetchArticles(from: generateSearchURL(from: query))
-        
-    }
+    } //функция поиска новостей, в массиве данных
     
     private func fetchArticles(from url:URL) async throws -> [Article] {
         let (data, response) = try await session.data(from: url)
        
         guard let response = response as? HTTPURLResponse else {
-            throw generateError(description: "Bad Respose")
+            throw generateError(description: "Ошибка ответа сервера")
         }
         
         switch response.statusCode {
@@ -50,10 +49,10 @@ struct NewsAPI {
             if apiResponse.status == "ok" {
                 return apiResponse.articles ?? []
             } else {
-                throw generateError(description: apiResponse.message ?? "A server error occured")
+                throw generateError(description: apiResponse.message ?? "Произошла ошибка сервера")
             }
         default:
-            throw generateError(description: "A server error occured")
+            throw generateError(description: "Произошла ошибка сервера")
         }
         
         
@@ -67,9 +66,9 @@ struct NewsAPI {
         url += "&language=en"
         url += "&q=\(percentEncodedString)"
         return URL(string: url)!
-    }
+    } //создаем поисковый запрос, главный вопрос, как он делается на русском?
     
     private func generateError(code: Int = 1, description: String) -> Error {
         NSError(domain: "NewsAPI", code: code, userInfo: [NSLocalizedDescriptionKey: description])
-    }
+    } //создаем ошибку
 }

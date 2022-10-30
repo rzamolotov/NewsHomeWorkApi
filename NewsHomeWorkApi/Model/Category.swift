@@ -34,7 +34,7 @@ enum Category: String, CaseIterable {
         }
     return rawValue.capitalized
     }
-}
+} //перечисляем категории и даем им название
 
 extension Category: Identifiable {
     var id: Self { self }

@@ -56,14 +56,12 @@ extension Article {
         let apiResponse = try! jsonDecoder.decode(NewsAPIResponse.self, from: data)
         return apiResponse.articles ?? []
     }
-}
+} 
 extension Article: Codable {}
 extension Article: Equatable {}
 extension Article: Identifiable {
     var id: String { url }
 }
-
-
 
 struct Source {
     let name: String

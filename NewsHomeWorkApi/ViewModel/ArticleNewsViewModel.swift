@@ -32,7 +32,7 @@ class ArticleNewsViewModel: ObservableObject {
             self.phase = .empty
         }
         self.fetchTaskToken = FetchTaskToken(category: selectedCategory, token: Date())
-    }
+    } 
     
     func loadArticles() async {
         if Task.isCancelled { return } //если задача загрузки артиклуов отменена вызываем прерываем загрузку артикулов
@@ -46,5 +46,5 @@ class ArticleNewsViewModel: ObservableObject {
             print(error.localizedDescription)
             phase = .failure(error)
         }
-    }
+    } //функция загрузки новостей
 }

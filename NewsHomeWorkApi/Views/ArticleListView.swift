@@ -16,7 +16,7 @@ struct ArticleListView: View {
         List{
             ForEach(articles) { article in
                 ArticleRowView(article: article)
-            }
+            } //создаем список новстей
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             .listRowSeparator(.hidden)
         }

@@ -28,7 +28,7 @@ struct NewsTabWiew: View {
         case .empty:
             ProgressView()
         case .success(let articles) where articles.isEmpty:
-            EmptyPlaseholderView(text: "No Articles", image: nil)
+            EmptyPlaseholderView(text: "Новостей не найдено", image: nil)
         case .failure(let error):
             RetryView(text: error.localizedDescription, retryAction: refreshTask)
             
@@ -47,16 +47,16 @@ struct NewsTabWiew: View {
     
     @Sendable private func loadTask() async {
             await articleNewsViewModel.loadArticles()
-    }
+    }//функция асинхронной загрузки новостей
     
     private func refreshTask() {
         articleNewsViewModel.fetchTaskToken = FetchTaskToken(category: articleNewsViewModel.fetchTaskToken.category, token: Date())
-    }
+    } //функция обновления станицы
         
     
     private var menu: some View {
         Menu {
-            Picker("Category", selection: $articleNewsViewModel.fetchTaskToken.category) {
+            Picker("Категории", selection: $articleNewsViewModel.fetchTaskToken.category) {
                 ForEach(Category.allCases) {
                     Text($0.text).tag($0)
                 }
@@ -65,7 +65,7 @@ struct NewsTabWiew: View {
             Image(systemName: "line.3.horizontal")
                 .imageScale(.large)
         }
-    }
+    } //кнопка меню
 }
 
 struct NewsTabWiew_Previews: PreviewProvider {

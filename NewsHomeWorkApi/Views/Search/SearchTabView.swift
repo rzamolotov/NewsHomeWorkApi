@@ -22,7 +22,6 @@ struct SearchTabView: View {
             if newValue.isEmpty {
                 searchViewModel.phase = .empty
             }
-            
         }
         .onSubmit(of: .search, search)
     }

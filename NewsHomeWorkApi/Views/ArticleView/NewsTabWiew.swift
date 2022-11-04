@@ -17,7 +17,7 @@ struct NewsTabWiew: View {
                 .overlay(overlayView)
                 .task(id: articleNewsViewModel.fetchTaskToken, loadTask)
                 .refreshable (action: refreshTask)
-                .navigationTitle(articleNewsViewModel.fetchTaskToken.category.text )
+                .navigationTitle(articleNewsViewModel.fetchTaskToken.category.name )
                 .navigationBarItems(trailing: menu)
         }
     }
@@ -58,7 +58,7 @@ struct NewsTabWiew: View {
         Menu {
             Picker("Категории", selection: $articleNewsViewModel.fetchTaskToken.category) {
                 ForEach(Category.allCases) {
-                    Text($0.text).tag($0)
+                    Text($0.name).tag($0)
                 }
             }
         } label: {

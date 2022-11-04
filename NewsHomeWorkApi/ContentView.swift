@@ -22,10 +22,14 @@ struct ContentView: View {
             
             BookmarkTabView()
                 .tabItem {
-                    Label("Избранное", systemImage: "heart")
+                    Label("Избранные статьи", systemImage: "heart")
+                }
+            
+            CategoryListView(category: Category.allCases)
+                .tabItem{
+                    Label("Категории", systemImage: "heart")
                 }
         }
-        
     }
 }
 

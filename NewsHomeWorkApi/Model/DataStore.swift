@@ -44,7 +44,7 @@ actor PlistDataStore<T: Codable>: DataStore where T: Equatable {
         } catch  {
             print(error.localizedDescription)
         }
-    } // функция сохранения новостей
+    } // функция сохранения новстей в избранном
     
     func load() -> T? {
         do {

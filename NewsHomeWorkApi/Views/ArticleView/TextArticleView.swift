@@ -34,7 +34,7 @@ struct TextArticleView: View {
                 Button {
                     toggleBookmark(for: article)
                 } label: {
-                    Image(systemName: articleBookmarkViewModel.isBookmarked(for: article) ? "heart" : "heart.fill")
+                    Image(systemName: articleBookmarkViewModel.isBookmarked(for: article) ? "heart.fill" : "heart")
                         .foregroundColor(.black)
                 } //кнопка избранное
                 .buttonStyle(.bordered)

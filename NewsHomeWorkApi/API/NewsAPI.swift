@@ -28,6 +28,25 @@ struct NewsAPI {
         return URL(string: url)!
     } // создаем URL для получения данных из API
     
+    func generateSearchURL(from query: String) -> URL {
+        let percentEncodedString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
+        
+        var url = "https://newsapi.org/v2/everything?"
+        url += "apiKey=\(apiKey)"
+        url += "&language=en"
+        url += "&q=\(percentEncodedString)"
+        return URL(string: url)!
+    } //создаем поисковый запрос, главный вопрос, как он делается на русском?
+    
+    func generateCategoryView(from category: Category) -> URL {
+        
+        var url = "https://newsapi.org/v2/top-headlines?"
+        url += "apiKey=\(apiKey)"
+        url += "&language=en"
+        url += "&category=\(category.name)"
+        return URL(string: url)!
+    } // вот тут нужно выбрать несколько категорий
+    
     func fetch(from category: Category) async throws -> [Article] {
         try await fetchArticles(from: generateNewsURL(from: category))
     } //функция получения новостей с API
@@ -55,16 +74,6 @@ struct NewsAPI {
             throw generateError(description: "Произошла ошибка сервера")
         } //генерируем ошибки
     }
-    
-    func generateSearchURL(from query: String) -> URL {
-        let percentEncodedString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
-        
-        var url = "https://newsapi.org/v2/everything?"
-        url += "apiKey=\(apiKey)"
-        url += "&language=en"
-        url += "&q=\(percentEncodedString)"
-        return URL(string: url)!
-    } //создаем поисковый запрос, главный вопрос, как он делается на русском?
     
     private func generateError(code: Int = 1, description: String) -> Error {
         NSError(domain: "NewsAPI", code: code, userInfo: [NSLocalizedDescriptionKey: description])

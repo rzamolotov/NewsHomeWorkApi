@@ -16,7 +16,7 @@ enum Category: String, CaseIterable {
     case science
     case health
     
-    var text: String {
+    var name: String {
         if self == .general {
             return "Главное"
         } else if self == .business {
@@ -41,3 +41,10 @@ extension Category: Identifiable {
 }
 extension Category: Codable {}
 extension Category: Equatable {}
+
+struct CategoryAPIResponse: Decodable {
+    
+    let status: String
+    let totalResults: Int?
+    let category: [Category]?
+}

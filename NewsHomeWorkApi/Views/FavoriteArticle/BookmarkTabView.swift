@@ -18,7 +18,7 @@ struct BookmarkTabView: View {
         NavigationView {
             ArticleListView(articles: articles)
                 .overlay(overlayView(isEmpty: articles.isEmpty))
-                .navigationTitle("Избранное")
+                .navigationTitle("Избранные статьи")
         }
         .searchable(text: $searchText)
     }

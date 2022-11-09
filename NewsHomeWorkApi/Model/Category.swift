@@ -18,19 +18,19 @@ enum Category: String, CaseIterable {
     
     var name: String {
         if self == .general {
-            return "Главное"
+            return "General"
         } else if self == .business {
-            return "Бизнес"
+            return "Business"
         } else if self == .technology {
-            return "Технологии"
+            return "Technology"
         } else if self == .entertainment {
-            return "Развлечения"
+            return "Entertainment"
         } else if self == .sports {
-            return "Спорт"
+            return "Sports"
         } else if self == .science {
-            return "Наука"
+            return "Science"
         } else if self == .health {
-            return "Здоровье"
+            return "Health"
         }
     return rawValue.capitalized
     }

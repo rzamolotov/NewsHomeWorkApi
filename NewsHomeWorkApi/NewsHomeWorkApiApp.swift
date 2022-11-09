@@ -12,6 +12,7 @@ struct NewsHomeWorkApiApp: App {
     
     @StateObject var articleBookmarkViewModel = ArticleBookmarkViewModel.shared
     
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

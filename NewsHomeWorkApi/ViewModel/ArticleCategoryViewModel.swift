@@ -11,10 +11,10 @@ import SwiftUI
 class ArticleCategoryViewModel: ObservableObject {
     
     @Published private(set) var favoriteCategories: [Category] = []
-    private let favoriteCategoriesStore = PlistDataStore<[Category]>(filename: "favoriteCategories")
+    let favoriteCategoriesStore = PlistDataStore<[Category]>(filename: "favoriteCategories")
     
     static let shared = ArticleCategoryViewModel()
-    private init() {
+    init() {
         Task {
             await load()
         }

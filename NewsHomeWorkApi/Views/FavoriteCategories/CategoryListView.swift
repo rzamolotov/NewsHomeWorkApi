@@ -22,7 +22,7 @@ struct CategoryListView: View {
                         }
                     Spacer()
                     
-                    NavigationLink("Показать выбраные категории", destination: CategoryTabView())
+                    NavigationLink("Показать выбраные категории", destination: CategoryTabView(category: Category.business))
                     .buttonStyle(.bordered)
                     .font(.headline)
                 }

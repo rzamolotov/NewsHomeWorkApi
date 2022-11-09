@@ -10,6 +10,8 @@ import SwiftUI
 struct NewsTabWiew: View {
     
     @StateObject var articleNewsViewModel = ArticleNewsViewModel()
+    @StateObject var articleCategoryViewModel = ArticleCategoryViewModel()
+    let category: Category
         
     var body: some View {
         NavigationView {
@@ -50,7 +52,9 @@ struct NewsTabWiew: View {
     }//функция асинхронной загрузки новостей
     
     private func refreshTask() {
-        articleNewsViewModel.fetchTaskToken = FetchTaskToken(category: articleNewsViewModel.fetchTaskToken.category, token: Date())
+        Task {
+            await articleNewsViewModel.refrechTask()
+        }
     } //функция обновления станицы
         
     
@@ -71,9 +75,11 @@ struct NewsTabWiew: View {
 struct NewsTabWiew_Previews: PreviewProvider {
     
     @StateObject static var articleBookmarkViewModel = ArticleBookmarkViewModel.shared
+    @StateObject static var articleCategoryViewModel = ArticleCategoryViewModel.shared
     
     static var previews: some View {
-        NewsTabWiew(articleNewsViewModel: ArticleNewsViewModel(articles: Article.previewData))
+        NewsTabWiew(category: Category.general)
             .environmentObject(articleBookmarkViewModel)
+            .environmentObject(articleCategoryViewModel)
     }
 }

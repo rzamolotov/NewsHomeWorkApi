@@ -18,7 +18,7 @@ struct BookmarkTabView: View {
         NavigationView {
             ArticleListView(articles: articles)
                 .overlay(overlayView(isEmpty: articles.isEmpty))
-                .navigationTitle("Избранные статьи")
+                .navigationTitle("Favorite Articles")
         }
         .searchable(text: $searchText)
     }
@@ -37,7 +37,7 @@ struct BookmarkTabView: View {
     @ViewBuilder
     func overlayView(isEmpty: Bool) -> some View {
         if isEmpty {
-            EmptyPlaseholderView(text: "Нет избранных статей", image: Image(systemName: "heart.slash.fill"))
+            EmptyPlaseholderView(text: "You Don`t Add Articles Yet", image: Image(systemName: "heart.slash.fill"))
         }
     }
 }

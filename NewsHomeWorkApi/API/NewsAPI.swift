@@ -39,17 +39,20 @@ struct NewsAPI {
     } //создаем поисковый запрос, главный вопрос, как он делается на русском?
     
     func generateCategoryView(from category: Category) -> URL {
-        
-        var url = "https://newsapi.org/v2/top-headlines?"
-        url += "apiKey=\(apiKey)"
+        var url = "https://newsapi.org/v2/top-headlines/"
+        url += "sources?\(category.name)"
         url += "&language=en"
-        url += "&category=\(category.name)"
+        url += "apiKey=\(apiKey)"
         return URL(string: url)!
     } // вот тут нужно выбрать несколько категорий
     
     func fetch(from category: Category) async throws -> [Article] {
         try await fetchArticles(from: generateNewsURL(from: category))
     } //функция получения новостей с API
+    
+    func fetchCategory(from category: Category) async throws -> [Article] {
+        try await fetchArticles(from: generateCategoryView(from: category))
+    } //Получаем выбранные новости
     
     func search(for query: String) async throws -> [Article] {
         try await fetchArticles(from: generateSearchURL(from: query))

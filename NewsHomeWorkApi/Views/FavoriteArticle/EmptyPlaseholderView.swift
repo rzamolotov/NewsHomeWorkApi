@@ -27,6 +27,6 @@ struct EmptyPlaseholderView: View {
 
 struct EmptyPlaseholderView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyPlaseholderView(text: "Нет избранных статей", image: Image(systemName: "heart.slash.fill"))
+        EmptyPlaseholderView(text: "You Don`t Add Articles Yet", image: Image(systemName: "heart.slash.fill"))
     }
 }

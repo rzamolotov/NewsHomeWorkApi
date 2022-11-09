@@ -10,23 +10,32 @@ import SwiftUI
 struct CategoryChoiseView: View {
     
     let category: Category
-    @EnvironmentObject var articleCategoryViewModel: ArticleCategoryViewModel
+    @StateObject var articleCategoryViewModel = ArticleCategoryViewModel()
     
     var body: some View {
         HStack {
-            Text(category.name)
-            
-            Spacer()
-            
             Button {
                 toggleCategory(for: category)
             } label: {
-                Image(systemName: articleCategoryViewModel.isAddToFavorites(for: category) ? "heart.fill" : "heart")
+                Text(category.name)
+                
+                Spacer()
+                
+                Image(systemName: getImageName(for: category))
                     .foregroundColor(.black)
-            }
+            }.foregroundColor(.black)
         }//: HStack
     }
-    private func toggleCategory(for category: Category) {
+    
+    private func getImageName(for category: Category) -> String {
+        if articleCategoryViewModel.isAddToFavorites(for: category) {
+            return "heart.fill"
+        } else {
+            return "heart"
+        }
+    }
+    
+    func toggleCategory(for category: Category) {
         if articleCategoryViewModel.isAddToFavorites(for: category) {
             articleCategoryViewModel.removeFromFavoriteCAtegories(for: category)
         } else {
@@ -37,10 +46,10 @@ struct CategoryChoiseView: View {
 
 struct CategoryChoiseView_Previews: PreviewProvider {
     
-    @StateObject static var articleCategoryViewModel = ArticleCategoryViewModel.shared
+    @StateObject var articleCategoryViewModel = ArticleCategoryViewModel()
     
     static var previews: some View {
         CategoryChoiseView(category: Category.technology)
-            .environmentObject(articleCategoryViewModel)
+           // .environmentObject(ArticleCategoryViewModel)
     }
 }

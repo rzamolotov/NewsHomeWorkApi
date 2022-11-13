@@ -12,22 +12,17 @@ struct ContentView: View {
         TabView {
             NewsTabWiew(category: Category.general)
                 .tabItem {
-                    Label("Новости", systemImage: "newspaper")
+                    Label("News", systemImage: "newspaper")
                 }
             
             SearchTabView()
                 .tabItem {
-                    Label("Поиск", systemImage: "magnifyingglass")
+                    Label("Search", systemImage: "magnifyingglass")
                 }
             
             BookmarkTabView()
                 .tabItem {
-                    Label("Избранные статьи", systemImage: "heart")
-                }
-            
-            CategoryListView(category: Category.allCases)
-                .tabItem{
-                    Label("Категории", systemImage: "heart")
+                    Label("Favorite", systemImage: "heart")
                 }
         }
     }

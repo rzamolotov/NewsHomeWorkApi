@@ -18,7 +18,7 @@ enum Category: String, CaseIterable {
     
     var name: String {
         if self == .general {
-            return "General"
+            return "Headlines"
         } else if self == .business {
             return "Business"
         } else if self == .technology {
@@ -34,7 +34,7 @@ enum Category: String, CaseIterable {
         }
     return rawValue.capitalized
     }
-} //перечисляем категории и даем им название
+}
 
 extension Category: Identifiable {
     var id: Self { self }

@@ -11,11 +11,11 @@ import Foundation
 protocol Cache: Actor {
     
     associatedtype V
-    var expirationInterval: TimeInterval { get }
+    var expirationInterval: TimeInterval { get } //срок работы кэша
     
-    func setValue(_ value: V?, forKey key: String)
-    func value(forKey key: String) -> V?
+    func setValue(_ value: V?, forKey key: String) //выбор значений
+    func value(forKey key: String) -> V? //значение
     
-    func removeValue(forKey key: String)
-    func removeAllValues()
+    func removeValue(forKey key: String)//удалить значение
+    func removeAllValues()//удалить все значения
 }

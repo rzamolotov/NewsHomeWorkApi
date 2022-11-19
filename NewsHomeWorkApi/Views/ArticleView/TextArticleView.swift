@@ -63,12 +63,24 @@ struct TextArticleView: View {
     }//функция которая проверяет нажата ли кнопка избранного или нет
 }
 
+extension UIApplication {
+    
+    var keyWindow: UIWindow? {
+        return UIApplication.shared.connectedScenes.filter { $0.activationState ==
+            .foregroundActive }.first(where: { $0 is UIWindowScene })
+            .flatMap({ $0 as? UIWindowScene })?.windows.first(where: \.isKeyWindow)
+    }
+}
+
 extension View {
     func presentShareSheet(url: URL) {
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?
+                        .present(activityVC, animated: true, completion: nil )
     } //функция поделиться
 }
+
+
 
 extension UIScreen{
    static let screenWidth = UIScreen.main.bounds.size.width

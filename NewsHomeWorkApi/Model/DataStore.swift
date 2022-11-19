@@ -29,7 +29,7 @@ actor PlistDataStore<T: Codable>: DataStore where T: Equatable {
         FileManager.default
             .urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("\(filename).plist")
-    } //создаем файл для хранения избранного
+    } //создаем файл для хранения данных
     
     func save(_ current: T) {
         if let saved = self.saved, saved == current {
@@ -44,7 +44,7 @@ actor PlistDataStore<T: Codable>: DataStore where T: Equatable {
         } catch  {
             print(error.localizedDescription)
         }
-    } // функция сохранения новстей в избранном
+    } // функция сохранения данных
     
     func load() -> T? {
         do {
@@ -57,5 +57,5 @@ actor PlistDataStore<T: Codable>: DataStore where T: Equatable {
             print(error.localizedDescription)
             return nil
         }
-    } //загрузка данных сохраненных новостей
+    } //загрузка данных
 }

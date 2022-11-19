@@ -49,6 +49,6 @@ class ArticleBookmarkViewModel: ObservableObject {
         Task {
             await bookmarkStore.save(bookmarks)
         }
-    }
+    }//обновляем список избранных
     
 }

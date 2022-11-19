@@ -19,7 +19,7 @@ struct RetryView: View {
                 .multilineTextAlignment(.center)
             
             Button(action: retryAction) {
-                Text("обновить страницу")
+                Text("Refresh Page")
             }
         })
     }
@@ -27,7 +27,7 @@ struct RetryView: View {
 
 struct RetryView_Previews: PreviewProvider {
     static var previews: some View {
-        RetryView(text: "Что-то сломалось, попробуйте") {
+        RetryView(text: "Something wrong, Try") {
         }
     }
 }

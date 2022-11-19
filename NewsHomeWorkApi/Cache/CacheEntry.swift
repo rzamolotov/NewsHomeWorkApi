@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class CacheEntry<V> {
     
     let key: String
@@ -20,7 +21,7 @@ final class CacheEntry<V> {
     
     func isCacheExpired(after date: Date = .now) -> Bool {
         date > expiredTimestamp
-    }
+    } //функция проверяет истек ли срок действия кэшка
     
 }
 

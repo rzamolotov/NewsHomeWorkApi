@@ -43,7 +43,7 @@ class ArticleNewsViewModel: ObservableObject {
     func refrechTask() async {
         await cache.removeValue(forKey: fetchTaskToken.category.rawValue)
         fetchTaskToken.token = Date()
-    }
+    }//обновление новостей
     
     func loadArticles() async {
         if Task.isCancelled { return } //если задача загрузки артиклуов отменена вызываем прерываем загрузку артикулов

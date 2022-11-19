@@ -17,4 +17,4 @@ final class KeysTracker<V>: NSObject, NSCacheDelegate {
         }
         keys.remove(entry.key)
     }
-}
+} //класс сохраняет ключи, по которым происходит сохранение в кэщ

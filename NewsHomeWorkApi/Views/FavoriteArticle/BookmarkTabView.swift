@@ -37,7 +37,7 @@ struct BookmarkTabView: View {
     @ViewBuilder
     func overlayView(isEmpty: Bool) -> some View {
         if isEmpty {
-            EmptyPlaseholderView(text: "You Don`t Add Articles Yet", image: Image(systemName: "heart.slash.fill"))
+            EmptyPlaseholderView(text: "You Don`t Add Articles, Yet", image: Image(systemName: "heart.slash.fill"))
         }
     }
 }

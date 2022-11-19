@@ -10,7 +10,7 @@ import SwiftUI
 struct NewsTabWiew: View {
     
     @StateObject var articleNewsViewModel = ArticleNewsViewModel()
-    @StateObject var articleCategoryViewModel = ArticleCategoryViewModel()
+    
     let category: Category
         
     var body: some View {
@@ -19,7 +19,7 @@ struct NewsTabWiew: View {
                 .overlay(overlayView)
                 .task(id: articleNewsViewModel.fetchTaskToken, loadTask)
                 .refreshable (action: refreshTask)
-                .navigationTitle(articleNewsViewModel.fetchTaskToken.category.name )
+                .navigationTitle(articleNewsViewModel.fetchTaskToken.category.name)
                 .navigationBarItems(trailing: menu)
         }
     }
@@ -30,7 +30,7 @@ struct NewsTabWiew: View {
         case .empty:
             ProgressView()
         case .success(let articles) where articles.isEmpty:
-            EmptyPlaseholderView(text: "Новостей не найдено", image: nil)
+            EmptyPlaseholderView(text: "News Not Found", image: nil)
         case .failure(let error):
             RetryView(text: error.localizedDescription, retryAction: refreshTask)
             
@@ -51,7 +51,7 @@ struct NewsTabWiew: View {
             await articleNewsViewModel.loadArticles()
     }//функция асинхронной загрузки новостей
     
-    private func refreshTask() {
+    @Sendable private func refreshTask() {
         Task {
             await articleNewsViewModel.refrechTask()
         }
@@ -75,11 +75,9 @@ struct NewsTabWiew: View {
 struct NewsTabWiew_Previews: PreviewProvider {
     
     @StateObject static var articleBookmarkViewModel = ArticleBookmarkViewModel.shared
-    @StateObject static var articleCategoryViewModel = ArticleCategoryViewModel.shared
-    
+
     static var previews: some View {
         NewsTabWiew(category: Category.general)
             .environmentObject(articleBookmarkViewModel)
-            .environmentObject(articleCategoryViewModel)
     }
 }
